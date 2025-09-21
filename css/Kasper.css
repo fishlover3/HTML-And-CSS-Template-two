@@ -1,0 +1,1424 @@
+/*start Variables*/
+:root {
+    --main-color: #19c8fa;
+    --transparent-color: rgb(15 116 143 / 70%);
+    --pragraph-color: #777;
+    --section-padding: 100px;
+}
+
+/*End Variables*/
+/*Start Global Rules*/
+* {
+    -webkit-box-sizing: border-box;
+    /*دي بادئات (prefixes) لضمان التوافق مع متصفحات قديمة (زي Chrome و Firefox).*/
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    /*بيشيل أي هوامش أو مسافات افتراضية بتحطها المتصفحات على بعض العناصر.*/
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    /*بيحدد نوع الخط الأساسي المستخدم في الموقع.*/
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    /*بيدوا مسافة داخلية من الجانبين (يمين وشمال)، علشان المحتوى ما يلمس أطراف الشاشة.*/
+    margin-left: auto;
+    /*بيخلي .container يتوسّط أفقيًا تلقائيًا.*/
+    margin-right: auto;
+}
+
+/*Small*/
+@media (min-width: 768px) {
+
+    /*القاعدة دي بتشتغل فقط لما يكو  ن عرض الشاشة أكبر من 768px.*/
+    .container {
+        width: 750px;
+        /*في الحالة دي، الحاوية .container بتاخد عرض 750px بدل ما تكون 100% من العرض.*/
+    }
+}
+
+/*Medium*/
+@media (min-width: 992px) {
+
+    /*القاعدة دي بتشتغل لما يكون عرض الشاشة 992px أو أكتر.*/
+    .container {
+        width: 970px;
+    }
+}
+
+/*Large*/
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+/*End  Global Rules*/
+
+/*Start Components*/
+.main-heading {
+    text-align: center;
+}
+
+.main-heading h2 {
+    font-weight: normal;
+    font-size: 40px;
+    position: relative;
+    margin-bottom: 70px;
+    text-transform: uppercase;
+    /*علشان الحروف تبقي كبيرة*/
+}
+
+.main-heading h2::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background-color: #333;
+    bottom: -30px;
+}
+
+.main-heading h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    bottom: -38px;
+    background-color: white;
+
+}
+
+.main-heading p {
+    width: 550px;
+    margin: 0 auto 100px;
+    max-width: 100%;
+    line-height: 2;
+    color: var(--pragraph-color);
+}
+
+
+/*End Components*/
+/*Start Header*/
+header {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    min-height: 97px;
+    /*لكن ممكن يكون أطول من كده لو المحتوى محتاج.العنصر لا يمكن أن يكون أقل من  97px ارتفاعًا*/
+}
+
+header .container::after {
+    /* header الخط الي تحت */
+    content: "";
+    position: absolute;
+    height: 1px;
+    background-color: #a2a2a2;
+    bottom: 0;
+    width: calc(100% - 30px);
+    /*يعطينا خطًا بعرض الحاوية ناقص 30 بكسل (15 من كل جانب).*/
+    left: 15px;
+    /*بداية الخط من اليسار بعد 15 بكسل.*/
+}
+
+header .logo img {
+    height: 40px;
+    /*بيحدد ارتفاع صورة اللوجو بـ 40 بيكسل.*/
+}
+
+header nav {
+    flex: 1;
+    /*ياخد كل المساحة المتاحة المتبقية بعد اللوجو.*/
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* ☰ هذه الخصائص للأيقونة */
+header nav .toggle-menu {
+    color: white;
+    font-size: 22px;
+}
+
+@media (min-width: 768px) {
+    header nav .toggle-menu {
+        display: none;
+    }
+}
+
+header nav ul {
+    display: flex;
+    /*يخلي العناصر داخل الـ <ul> (روابط الـ <li>) جنب بعض أفقيًا.*/
+}
+
+/*عندما يكون عرض الشاشة 768 بكسل أو أكثر، يتم إخفاء قائمة الروابط*/
+@media (max-width: 767px) {
+    header nav ul {
+        display: none;
+    }
+
+    /*  يتم وضعها أسفل الهيدر وتأخذ عرض %100 من الشاشة(column) تظهر القائمة بشكل عمودي  toggle-menu عندما يمر المستخدم بالماوس على*/
+    header nav .toggle-menu:hover+ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 100%;
+        top: 100%;
+        left: 0;
+        background-color: rgb(0 0 0 / 50%);
+    }
+
+    header nav ul li a {
+        padding: 15px !important;
+    }
+}
+
+header nav ul li a {
+    /* a هذه الخواص لجميع الينك  */
+    padding: 40px 10px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+    position: relative;
+    z-index: 2;
+}
+
+/* Home هذه الخواص لكلمة */
+header nav ul li a.active,
+header nav ul li a:hover {
+    color: var(--main-color);
+    /* --main-color يغير لون الرابط عند الوقف عليه  ويضيف خط سفلي بلون */
+    border-bottom: 1px solid var(--main-color);
+}
+
+/*لعمل الخط الي قبل علامة البحث*/
+header nav .form {
+    width: 40px;
+    /*هذا يحدد عرض العنصر .form نفسه، وليس عرض الخط!*/
+    height: 30px;
+    position: relative;
+    /*عشان نقدر نتحكم في مكان الأيقونة جواه.*/
+    margin-left: 30px;
+    /*مسافة بينه وبين روابط القائمة.*/
+    border-left: 1px solid white;
+}
+
+/*خصائص علامة البحث */
+header nav .form i {
+    color: white;
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    /*عشان تتوسّط رأسيًا.*/
+
+}
+
+/*End Header*/
+/*Start Landing*/
+.landing {
+    min-height: 100vh;
+    /*يجعل ارتفاع القسم لا يقل عن ارتفاع شاشة العرض كلها (100% من ارتفاع النافذة).*/
+    background-image: url("../images/landing.jpg");
+    background-color: #1f2021;
+    background-size: cover;
+    /*يجعل الصورة تغطي مساحة القسم بالكامل بدون تشويه (يقص جزء من الصورة إذا لزم).*/
+    position: relative;
+    /*يجعل هذا العنصر هو المرجع لعناصر داخلية بـ position: absolute.*/
+}
+
+/*طبقة شفافة فوق الصورة لتظليلها (داكنة قليلاً) باستخدام لون أسود مع شفافية 60%.*/
+.landing .overlay {
+    position: absolute;
+    /*يجعلها تغطي القسم تمامًا.*/
+    width: 100%;
+    /*تغطي العرض والارتفاع بالكامل.*/
+    height: 100%;
+    left: 0;
+    /*تبدأ من الزاوية اليسرى العليا.*/
+    top: 0;
+    background-color: rgb(0 0 0 / 60%);
+}
+
+/*دا النص الموجود داخل القسم، يظهر على الجانب الأيسر:*/
+.landing .text {
+    position: absolute;
+    /*تحديد مكان النص بدقة داخل القسم.*/
+    left: 0;
+    top: 50%;
+    width: 50%;
+    transform: translateY(-50%);
+    padding: 50px;
+    background-color: var(--transparent-color);
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.landing .text .content {
+    max-width: 500px;
+    /* فقط حتي لو الشاشة اوسع من كدا pxخلي العرض الاقصي للعنصر ده هو  500*/
+}
+
+@media (max-width: 767px) {
+    .landing .text {
+        width: 100%;
+        /*%عرض كامل العرض (100%) بدلًا من 50*/
+    }
+
+    .landing .text .content {
+        max-width: 100%;
+        /*أن يكون بعض كامل بدون حد أقصي .content يسمح لمحتوي النص أن يكون */
+    }
+}
+
+.landing .text h2 {
+    line-height: 1.5;
+    font-size: 32px;
+    font-weight: normal;
+    /*"استخدم الوزن العادي للخط."*/
+    margin-bottom: 20px;
+}
+
+.landing .text p {
+    font-size: 14px;
+    line-height: 2;
+}
+
+.landing .change-background {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ddd;
+}
+
+@media (max-width: 767px) {
+    .landing .change-background {
+        display: none;
+    }
+}
+
+.landing .fa-angle-left {
+    left: 30px;
+    /*العنصر ده بيتحرك من ناحية الشمال بمسافة 30px.*/
+}
+
+.landing .fa-angle-right {
+    right: 30px;
+}
+
+/*الجزء الخاص ب 3 دوائر الي في الاسفل وفي المنتصف */
+.landing .bullets {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 30px;
+    display: flex;
+}
+
+.landing .bullets li {
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.landing .bullets li.active {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+/* End Landing*/
+
+/*Start Services*/
+.services {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+@media (min-width: 768px) {
+    .services .services-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        /* repeat(...) => كرر الأعمدة 
+        auto-fill => حط أكبر عدد ممكن حسب عرض الشاشة
+        minmax(450px, 1fr) =>  ولو فية مساحة زيادة, يكبر px كل صندوق لازم يكون على الأقل 450
+        */
+        grid-column-gap: 40px;
+        /*مسافة أفقية بين الأعمدة.*/
+        grid-row-gap: 60px;
+        /*مسافة رأسية بين الصفوف.*/
+    }
+}
+
+.services .srv-box {
+    display: flex;
+    /*يجعل الأيقونة والنص في صف واحد أفقي بشكل تلقائي (إلى أن نغير الاتجاه لاحقًا في الشاشات الصغيرة).*/
+}
+
+.services .srv-box i {
+    margin-right: 50px;
+    /*يضيف مسافة مقدارها 50px إلى يمين الأيقونة.*/
+}
+
+@media (max-width: 767px) {
+    .services .srv-box {
+        display: flex;
+        flex-direction: column;
+        /*يغير اتجاه العناصر من أفقي إلى عمودي*/
+        align-items: center;
+        text-align: center;
+        margin-bottom: 40px;
+        /*مسافة أسفل كل صندوق خدمة.*/
+    }
+
+    .services .srv-box i {
+        margin: 0 0 30px;
+        /*يضيف مسافة أسفل الأيقونة مقدارها 30px.
+        ويحذف المسافة اليمنى لأنها لم تعد مناسبة في الاتجاه العمودي.
+        */
+    }
+}
+
+.services .srv-box h3 {
+    margin-bottom: 30px;
+    color: var(--main-color);
+}
+
+.services .srv-box p {
+    line-height: 2;
+    /*يجعل السطرين متباعدين قليلاً لسهولة القراءة.*/
+    color: var(--pragraph-color);
+}
+
+/*End Services*/
+/*Start Design*/
+.design {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    height: 600px;
+    /*يحدد طول القسم بثبات: 600 بكسل*/
+    position: relative;
+    /*للسماح بإضافة طبقة تغطية فوق الخلفية باستخدام ::before*/
+    background-image: url("../images/design-features.jpg");
+    background-size: cover;
+    /*يجعل الصورة تغطي الخلفية كاملة*/
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    /*يمنع خروج أي جزء من العناصر خارج القسم*/
+}
+
+/*الطبقة السوداء الشفافة فوق الخلفية*/
+.design::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 60%);
+}
+
+.design .image,
+.design .text {
+    z-index: 2;
+    position: relative;
+    flex: 1;
+    /*يجعل كل واحد منهم يأخذ نصف المساحة تقريبًا*/
+}
+
+.design .image {
+    text-align: center;
+
+}
+
+@media (max-width: 767px) {
+    .design .image {
+        display: none;
+    }
+}
+
+.design .image img {
+    position: relative;
+    bottom: -150px;
+}
+
+.design .text {
+    color: white;
+    padding: 50px;
+    background-color: var(--transparent-color);
+}
+
+.design .text h2 {
+    font-weight: normal;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.design .text ul li {
+    padding: 15px 0;
+}
+
+.design .text ul li::before {
+    font-family: 'Font Awesome 5 free';
+    /*نستخدم خط Font Awesome اللي فيه أيقونات*/
+    content: '\f390';
+    /*"اعرض الرمز اللي كوده \f390 من خط Font Awesome."*/
+    font-weight: 900;
+    margin-right: 20px;
+    position: relative;
+    top: 1;
+}
+
+/*End Design*/
+/*Start Portfolio*/
+.portfolio {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+/*الجزء الخاص ب Links*/
+.portfolio .shuffle {
+    display: flex;
+    justify-content: center;
+    /* في صف ومتمركزة في النص. */
+}
+
+.portfolio .shuffle li {
+    padding: 20px;
+}
+
+/* الجزء الخاص بكلم All */
+.portfolio .shuffle li.active {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.portfolio .shuffle li:hover {
+    background-color: var(--main-color);
+    color: white;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio .imgs-container {
+    display: flex;
+    /*يخلي الصور في صف واحد.*/
+    flex-wrap: wrap;
+    /*يسمح بانتقال الصور للسطر اللي بعده لو مفيش مساحة.*/
+    margin-top: 60px;
+    /*مسافة من الأعلى تفصل الصور عن الفلاتر أو العنوان.*/
+}
+
+/* الصندوق الفردي (box) الخاص بكل صورة */
+.portfolio .imgs-container .box {
+    position: relative;
+    /* (captionبموقع "نسبي" بالنسبة له (زي .box بنستخدمه عشان نقدر نحط عناصر تانية جوه */
+    overflow: hidden;
+}
+
+/* الجزء الخاص بالموس تتحرك الصورة */
+.portfolio .imgs-container .box:hover .caption {
+    bottom: 0;
+    /*يتم تحريك عنصر الكابشن الي أسفل الصندوق ولما تحط الماوس بيتحرك لفوق وبيظهر داخل الصندوق */
+}
+
+.portfolio .imgs-container .box:hover img {
+    transform: rotate(3deg) scale(1.1);
+    /*لما تمرر الماوس علي الصورة دوران بسيط بزاوية 3درجات وتكبر بنسبة %10*/
+}
+
+/*الجزء الخاص بالموس */
+@media (min-width: 768px) {
+    .portfolio .imgs-container .box {
+        flex-basis: 50%;
+        /*الحجم اللي العنصر يبدأ بيه قبل ما Flexbox يوزّع المساحة الفاضية.*/
+    }
+}
+
+@media (min-width: 1199px) {
+    .portfolio .imgs-container .box {
+        flex-basis: 25%;
+    }
+}
+
+/*تنسيق الصورة داخل الصندوق:*/
+.portfolio .imgs-container .box img {
+    max-width: 100%;
+    /*الصورة بتاخد أقصى عرض داخل الصندوق (لكن مش أكتر من 100% من حجمه).*/
+    transition: 0.3s;
+}
+
+/* الوصف اللي يظهر فوق الصورة عند الهوفر */
+.portfolio .imgs-container .box .caption {
+    position: absolute;
+    /*.box هيتموضع بشكل حر داخل العنصر الاب الي هو .captionالعنصر */
+    left: 0;
+    padding: 20px;
+    background-color: white;
+    width: 100%;
+    /*الكابشن هياخد العرض الكامل للصورة.*/
+    transition: 0.3s;
+    bottom: -100%;
+    /*يعني الكابشن طالع بره الصورة ومش باين، لأنه موجود تحتها تمامًا.*/
+
+}
+
+/* h4, p  الجزء الخاص بال*/
+.portfolio .imgs-container .box .caption h4 {
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.portfolio .imgs-container .box .caption p {
+    color: var(--main-color);
+}
+
+/* More الجزء الخاص بالزر */
+.portfolio .more {
+    background-color: var(--main-color);
+    color: white;
+    padding: 15px 20px;
+    display: block;
+    /* تقدر تتحكم في حجمها و تقدر توسطها وتبان كزر مستقل<=block متعرفش تتحكم فيها اما  inline بتكون  aالعناصر زي */
+    width: fit-content;
+    /*"خلي عرض الزر للعنصر على قد المحتوى اللي جواه بالظبط، مش أكتر ومش أقل"*/
+    margin: 30px auto;
+    text-decoration: none;
+    /*دي بتشيل الخط السفلي اللي بيكون موجود بشكل افتراضي تحت الروابط <a>.*/
+    text-transform: uppercase;
+    /*يخلي كل الحروف كابيتال*/
+    border-radius: 4px;
+}
+
+.portfolio .more:hover {
+    transform: scale(1.55);
+    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* End Portfolio*/
+/*Start Video*/
+.video {
+    position: relative;
+}
+
+/* لطبقة الداكنة فوق الفيديو ::before */
+.video::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 40%);
+}
+
+/* الفيديو نفسه */
+.video video {
+    width: 100%;
+    /*الفيديو بياخد العرض الكامل للحاوية، عشان يبقى fullscreen أو ياخد مساحة مرنة.*/
+}
+
+/* النص اللي فوق الفيديو .text */
+.video .text {
+    width: 100%;
+    /*النص ياخد عرض الفيديو بالكامل*/
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    padding: 50PX;
+    text-align: center;
+    background-color: var(--transparent-color);
+    color: white;
+}
+
+.video .text h2 {
+    margin: 0 0 30px;
+    text-transform: uppercase;
+    font-weight: normal;
+
+}
+
+.video .text p {
+    margin-bottom: 30px;
+}
+
+/* الزر <button> */
+.video .text button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    /*إزالة الحدود الافتراضية للزر*/
+    text-transform: uppercase;
+}
+
+/*End Video*/
+/*Start About*/
+.about {
+    padding-top: var(--section-padding);
+    overflow: hidden;
+    text-align: center;
+}
+
+.about img {
+    position: relative;
+    bottom: -120px;
+    margin-top: -120px;
+    /*يسحب الصورة لأعلى من مكانها الطبيعي بنفس المقدار*/
+    max-width: 100%;
+    /* Responsive يخلي الصورة ما تكبرش أكتر من عرض الحاوية اللي جواها، عشان تظل */
+}
+
+@media (max-width: 767px) {
+    .about img {
+        bottom: -60px;
+        margin-top: -60px;
+    }
+}
+
+/*End About*/
+/*Start Statistics*/
+.stats {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    text-align: center;
+    background-image: url("../images/stats.png");
+    background-size: cover;
+    position: relative;
+}
+
+.stats::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 70%);
+}
+
+.stats .container {
+    position: relative;
+    /*علشان تقوم بوضع الكلام فوق الخلفية السوداء*/
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stats .container .box {
+    color: white;
+    padding: 50px;
+    background-color: var(--transparent-color);
+}
+
+@media (max-width: 767px) {
+    .stats .container .box {
+        flex-basis: 100%;
+        border-bottom: 2px solid white;
+    }
+}
+
+@media (min-width: 768px) {
+    .stats .container .box {
+        flex-basis: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .stats .container .box {
+        flex-basis: 25%;
+    }
+}
+
+.stats .container .box i {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 30px;
+}
+
+.stats .container .box .number {
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0 0 20px;
+}
+
+.stats .container .box p {
+    font-size: 14px;
+}
+
+/*End Statistics*/
+/*Start Skills*/
+.our-skills {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+.our-skills .container {
+    display: flex;
+    justify-content: space-between;
+    /* Skills و Testimonials مسافة متساوية بين العناصر الأفقية الي هيا بين */
+    flex-wrap: wrap;
+    /*لو مفيش مساحة كفاية، العناصر تنزل تحت بعض بدل ما تخرج برا الشاشة*/
+}
+
+/* ياخذ 45% من العرض هذا يستخدم لتقسيم الشاشة الي عمودين جنب بعض container داخل div في الشاشة الكبيرة كل عنصر */
+@media (min-width: 992px) {
+
+    /*  ه  هيطبق عليهم الاتي هيأخذ عرض 45% من مساحة الحاويةskils اسمة  div  , testimonials اسمة  div container بعدdiv 2في */
+    .our-skills .container>div {
+        flex-basis: 45%;
+    }
+}
+
+/*testimonilals , skills الي فوق في h3  الجزء الخاص بال */
+.our-skills .container>div>h3 {
+    text-align: center;
+    margin: 0 0 30px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+/*testimonilals , skills الي فوق في p  الجزء الخاص بال */
+.our-skills .container>div>p {
+    color: var(--pragraph-color);
+    line-height: 2;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* الي جنب الصورة الاولي p الجزء الخاص بال*/
+.our-skills .testimonials .content {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    /*ممكن نحذف هذا السطر بس الصورة مش هتبقي مضبوطة */
+}
+
+/*الجزء الخاص بالصورة الاولي */
+.our-skills .testimonials .content img {
+    width: 100px;
+    /*مفيش ارتفاع لان ابعد الصورة متساويه فالارتفاع بيتحدد تلقائيا */
+    border-radius: 50%;
+    margin-right: 50px;
+}
+
+/*في الشاشات الصغيرة */
+@media (max-width: 767px) {
+    .our-skills .testimonials .content {
+        flex-direction: column;
+        /*من افقي الي عمودي  Flex يتم تغيير اتجاه */
+        text-align: center;
+    }
+
+    .our-skills .testimonials .content img {
+        margin: 0 auto 20px;
+    }
+}
+
+/*الجزء الخاص بالنص الي جنب الصورة */
+.our-skills .testimonials .text {
+    line-height: 1.8;
+    border-bottom: 2px solid #ccc;
+}
+
+/* p الي تحت John Doe, CEO هذا الجزء الخاص بكلمة */
+.our-skills .testimonials .text p {
+    color: var(--pragraph-color);
+    text-align: right;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/*الجزء الخاص 3 دوائر الي في الاسفل علي الشمال */
+.our-skills .testimonials .bullets {
+    display: flex;
+    /*ترتيب الدوائر بشكل أفقي.*/
+    justify-content: center;
+    /*توسيطها.*/
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.our-skills .testimonials .bullets li {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    margin: 0 0 auto;
+    margin-right: 10px;
+}
+
+/*الجزء الخاص بالنقطة الي المنتصف */
+.our-skills .testimonials .bullets li.active {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+/* skills بدايه الجزء الخاص بال */
+.our-skills .skills .prog-holder {
+    margin-bottom: 40px;
+    /*هذا الجزء لإضافة مسافة بين كل شريط مهارة والتاني، لتكون واضحة ومرتبة.*/
+}
+
+/*الي هيا الكلمة المكتوبة فوق الشريط  h4 الجزءالخاص  ب */
+.our-skills .skills .prog-holder h4 {
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+/* الجزءالخاص  بالخط نفسة*/
+.our-skills .skills .prog-holder .prog {
+    background-color: #dedadc;
+    height: 30px;
+    /*ارتفاع*/
+}
+
+/*الجزء الملونا الي فوق الخط الذي يمثل التقدم الفعلي.*/
+.our-skills .skills .prog-holder .prog span {
+    display: block;
+    /*يظهر كـ "بلوك"، يعني ياخذ عرض كامل متاح داخل العنصر الأب. span يجعل العنصر */
+    background-color: var(--main-color);
+    height: 100%;
+    /*يجعل ارتفاع الشريط يملأ ارتفاع العنصر الأب .prog (اللي هو 30px).*/
+    position: relative;
+    /*حتى نتمكن من وضع العناصر فوقه (مثل المؤشر الذي يعرض النسبة).*/
+}
+
+/*يعرض قيمة التقدم (مثلاً 90%).*/
+.our-skills .skills .prog-holder .prog span::before {
+    content: attr(data-progress);
+    /* span داخل العنصر  data-progress يعرض المحتوى الموجود في الخاصية*/
+    position: absolute;
+    /* يجعل المربع الي فيه النسبة تظهر فوق العنصر، في مكان محدد بدقة.ضروري هنا لأننا نريد وضع المربع  فوق نهاية شريط التقدم.*/
+    background-color: black;
+    color: white;
+    top: -40px;
+    right: -18px;
+    padding: 4px 0;
+    width: 40px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+/*هذا الجزء يصنع سهم صغير أسفل المؤشر السابق،*/
+.our-skills .skills .prog-holder .prog span::after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 8px;
+    border-color: black transparent transparent;
+    right: -8px;
+    top: -15px;
+}
+
+/*End Skills*/
+/* Start Quote */
+.quote {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-image: url("../images/quote.jpg");
+    background-size: cover;
+    /*يجعل الصورة تغطي كل مساحة العنصر حتى لو اضطرت تقطع منها شوية.*/
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+/*الجزء الخاص باللون الشاف الي ظاهر علي الصورة */
+.quote::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 70%);
+}
+
+/* (::before). يظهر فوق التظليل (::before). .containerيضمن أن المحتوى داخل */
+.quote .container {
+    position: relative;
+}
+
+/*التنسيقات بتعت علامتي الاقتباس */
+.quote .quote-icon {
+    font-size: 30px;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+/*النص الموجود داخل عنصر*/
+.quote .quote-text {
+    font-size: 30px;
+    display: inline;
+    color: white;
+    line-height: 2;
+}
+
+.quote .container span {
+    display: flex;
+    justify-content: center;
+    margin: 30px 20px;
+}
+
+/* End Quote */
+/*Start Pricing*/
+.pricing {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+/*تقسيم المحتوي الي أعمدة */
+.pricing .plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* لكل عمود,املأ الصف بالكامل بعدد مناسب من الأعمدة تلقائيًا px250 أنشئ أعمدة بحد أدنى */
+    gap: 30px;
+    /*مسافة 30px بين كل الأعمدة والصفوف.*/
+}
+
+/* (plan) كل خطة تسعير */
+.pricing .plans .plan {
+    background-color: #d1c7c75c;
+    text-align: center;
+}
+
+/* (head) الجزء الخاص رأس الخطة */
+.pricing .plans .plan .head {
+    padding: 40px 20px;
+    border-top: 1px solid var(--main-color);
+    border-bottom: 1px solid var(--main-color);
+}
+
+/*عنوان الخطة + السعر*/
+.pricing .plans .plan .head h3 {
+    font-weight: normal;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* after , before الجزء الي فيه السعر و */
+.pricing .plans .plan .head span {
+    font-size: 60px;
+    font-weight: 600;
+}
+
+/* $قيل السعر يظهر الرمز */
+.pricing .plans .plan .head span::before {
+    content: "$";
+    font-size: 25px;
+    position: relative;
+    top: -40px;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+/* /Mo بعد السعر يظهر الرمز */
+.pricing .plans .plan .head span::after {
+    content: "/Mo";
+    font-size: 20px;
+    position: relative;
+    font-weight: 600;
+}
+
+.pricing .plans .plan ul {
+    border-bottom: var(--main-color);
+}
+
+.pricing .plans .plan ul li {
+    position: relative;
+    padding: 20px;
+}
+
+/*ماعدا العنصر الاخير,, يعني كل العنصر هيبقي تحتها خط ماعدا العنصر الاخير li هذا الجزء خاص بكل العنصر داخل */
+.pricing .plans .plan ul li:not(:last-child)::after {
+    content: "";
+    width: 120px;
+    height: 1px;
+    background-color: var(--main-color);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+}
+
+/*هذا هو زر أو رابط "اشتري الآن" الموجود في أسفل كل خطة.*/
+.pricing .plans .plan .foot a {
+    display: block;
+    padding: 20px 20px;
+    text-decoration: none;
+    border: 1px solid var(--main-color);
+    width: fit-content;
+    /*تعني أن عرض العنصر سيكون حسب حجم محتواه فقط، وليس ممدودًا بالكامل.*/
+    margin: 30px auto;
+    /*علشان العنصر يتوسط*/
+    color: var(--main-color);
+    border-radius: 5px;
+}
+
+/*الجزء الخاص بالنص أسفل القسم*/
+.pricing .contact-text {
+    text-align: center;
+    margin: 50px auto 20px;
+    font-size: 20px;
+}
+
+/*الجزء الخاص الزر الاخير*/
+.pricing .contact-link {
+    display: block;
+    /*يعني يبدأ في سطر جديد ويمكن التحكم في أبعاده بسهولة.*/
+    width: fit-content;
+    /*العنصر بيأخذ الحجم علي حسب محتوه */
+    margin: 20px auto;
+    /*جعل العنصر يتوسط أفقياً في الحاوية*/
+    background-color: var(--main-color);
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    /* ease: طريقة تسارع الحركة.
+    0.2s: المدة الزمنية للتحوّل
+    all معناها "طبّق الحركة على أي خاصية يتم تغييرها"
+    */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /*هذه الخاصية تضيف ظل للصندوق*/
+}
+
+/*التأثير عند التمرير بالماوس*/
+.pricing .contact-link:hover {
+    background-color: white;
+    color: var(--main-color);
+    transform: scale(1.05);
+    /* تكبير خفيف */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    /* ظل أقوى */
+}
+
+/*End Pricing*/
+/*Start Subscribe*/
+.subscribe {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-image: url("../images/subscribe.jpg");
+    background-size: cover;
+    /*يجعل الصورة تغطي المساحة حتي لو تم قص جزء منها */
+    position: relative;
+    color: white;
+}
+
+/*طبقة غامقة فوق الصورة*/
+.subscribe::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 50%);
+}
+
+.subscribe .container {
+    position: relative;
+    display: flex;
+    /*لجعل المحتوى (نص + نموذج) جنب بعض.*/
+    align-items: center;
+    /*يجعل العناصر تتوسّط عموديًا.*/
+}
+
+/*في الشاشات الصغيرة هيبقي تحت بعض */
+@media (max-width: 991px) {
+    .subscribe .container {
+        flex-direction: column;
+    }
+}
+
+.subscribe form {
+    display: flex;
+    position: relative;
+    width: 500px;
+    /*هذا هو العرض الأساسي للنموذج*/
+    max-width: 100%;
+    /*معناها: "لو مساحة الشاشة أصغر من 500px، خليه يأخذ أقصى عرض ممكن بدون ما يخرج من الحاوية."*/
+}
+
+/*الأيقونة داخل الفورم*/
+.subscribe form i {
+    position: absolute;
+    top: 50%;
+    /*تجعل الأيقونة تتوسّط عموديًا داخل حقل البريد.*/
+    transform: translateY(-50%);
+    left: 25px;
+}
+
+/*حقل البريد الإلكتروني*/
+.subscribe form input[type="email"] {
+    border: 1px solid white;
+    border-right: none;
+    background: none;
+    caret-color: var(--main-color);
+    padding: 20px 20px 20px 60px;
+    /*لون المؤشر داخل الحقل.*/
+    width: calc(100% - 130px);
+    /* (اللي هو 130px). اجعل عرض الحقل يساوي العرض الكامل للنموذج ناقص عرض زر الإرسال */
+}
+
+/* زر الإرسال */
+.subscribe form input[type="submit"] {
+    width: 130px;
+    background-color: var(--main-color);
+    color: white;
+    border: 1px solid white;
+    border-left: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+
+/* :focus: عند الضغط على الحقل أو الزر. */
+.subscribe form input[type="email"]:focus,
+.subscribe form input[type="submit"]:focus {
+    outline: none;
+    /*يزيل الإطار الأزرق الافتراضي.*/
+    color: white;
+}
+
+/*  تظهر باللون الابيضYour Emial علشان كلمة */
+.subscribe form ::placeholder {
+    color: white;
+}
+
+/* p الجزء الخاص */
+.subscribe p {
+    line-height: 2;
+    margin-left: 50px;
+}
+
+/*في الشاشات الصغيرة p الجزء الخاص */
+@media (max-width: 991px) {
+    .subscribe p {
+        margin: 30px 0 0;
+        text-align: center;
+    }
+}
+
+/*End Subscribe*/
+/*Start Contact Us*/
+.contact {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+.contact .content {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+@media (max-width: 767px) {
+    .contact .content {
+        flex-direction: column;
+    }
+}
+
+.contact .content form {
+    flex-basis: 70%;
+    /*flex-basis: 70%: النموذج يأخذ 70% من عرض .content (يعني حيزه أكبر من جزء المعلومات).*/
+}
+
+/*تنسيق الحقول داخل النموذج*/
+.contact .content form .main-input {
+    padding: 20px;
+    display: block;
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
+    width: 100%;
+    caret-color: var(--main-color);
+}
+
+.contact .content form .main-input:focus {
+    outline: none;
+}
+
+/* الحقل الخاص بالرسالة */
+.contact .content form textarea.main-input {
+    height: 200px;
+}
+
+/* زر الإرسال */
+.contact .content form input[type="submit"] {
+    background-color: var(--main-color);
+    color: white;
+    padding: 20px;
+    border: none;
+    display: flex;
+    margin-left: auto;
+    /*علشان العنصر يظهر علي الشمال */
+    text-transform: uppercase;
+    cursor: pointer;
+    /*"غيّر شكل الماوس إلى يد (👆) عندما يمر المستخدم على العنصر."*/
+    border-radius: 5px;
+}
+
+/* تأثير عند التحويم (hover) */
+.contact .content form input[type="submit"]:hover {
+    box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    transform: scale(1.09);
+}
+
+/*في الوبيلات الزر هيظهر في المنتصف */
+@media (max-width: 767px) {
+    .contact .content form input[type="submit"] {
+        margin: 20px auto;
+    }
+}
+
+/* الجزء الخاص بالمعلومات .info */
+.contact .content .info {
+    flex-basis: 25%;
+}
+
+@media (max-width: 767px) {
+    .contact .content .info {
+        order: -1;
+        /*يجعل معلومات التواصل تظهر فوق النموذج في الجوال.*/
+        text-align: center;
+    }
+}
+
+/*h4  2 عناوين المعلومات  */
+.contact .content .info h4 {
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* أرقام الهواتف */
+.contact .content .info .phone {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--pragraph-color);
+}
+
+/*h4 => الثاني فقط*/
+.contact .content .info h4:nth-of-type(2) {
+    margin-top: 100px;
+}
+
+@media (max-width: 767px) {
+    .contact .content .info h4:nth-of-type(2) {
+        margin-top: 30px;
+        /*يقلل المسافة لتناسب الشاشة الصغيرة.*/
+    }
+}
+
+/* العنوان (address) */
+.contact .content .info address {
+    color: var(--pragraph-color);
+    line-height: 2;
+}
+
+@media (max-width: 767px) {
+    .contact .content .info address {
+        margin-bottom: 40px;
+    }
+}
+
+/*End Contact Us*/
+/* Start Footer */
+.footer {
+    padding-top: calc(var(--section-padding) / 2);
+    padding-bottom: calc(var(--section-padding) / 2);
+    background-image: url("../images/subscribe.jpg");
+    background-size: cover;
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 70%);
+}
+
+.footer .container {
+    position: relative;
+    /*ضروري علشان الطبقات تتوزع بشكل سليم.*/
+}
+
+/* صورة داخل الفوتر */
+.footer img {
+    margin-bottom: 20px;
+}
+
+/* فقرة (ليست حقوق نشر) */
+.footer p:not(.copyright) {
+    text-transform: uppercase;
+    padding: 20px;
+    border-bottom: 1px solid white;
+    font-size: 22px;
+    width: fit-content;
+    /*العرض على قد المحتوى فقط*/
+    margin: 20px auto;
+}
+
+/* أيقونات السوشيال ميديا */
+.footer .social-icons i {
+    padding: 10px 15px;
+}
+
+/* .copyright قسم حقوق النشر */
+.footer .copyright {
+    margin-top: 60px;
+}
+
+.footer .copyright span {
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+/* End Footer */
